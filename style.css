@@ -1,0 +1,28 @@
+*{margin: 0;padding: 0}
+.window{
+    width: 500px;
+    height: 400px;
+    overflow: hidden;
+    margin: 50px auto;
+}
+.images{
+    position: relative
+}
+.images>img{
+    transition: all 0.5s;
+    position: absolute;
+}
+.images>img.current{
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.images>img.leave{
+    top: 0;
+    z-index: 1;
+    transform: translateX(-100%)
+}
+.images>img.enter{
+    top: 0;
+    transform: translateX(100%)
+}
