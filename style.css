@@ -6,23 +6,13 @@
     margin: 50px auto;
 }
 .images{
-    position: relative
-}
-.images>img{
+    display: flex;
+    width: 100%;
     transition: all 0.5s;
-    position: absolute;
 }
-.images>img.current{
-    top: 0;
-    left: 0;
-    z-index: 1;
+.images>image{
+    width: 100%;
 }
-.images>img.leave{
-    top: 0;
-    z-index: 1;
-    transform: translateX(-100%)
-}
-.images>img.enter{
-    top: 0;
-    transform: translateX(100%)
+.buttonsWrapper{
+    text-align: center;
 }

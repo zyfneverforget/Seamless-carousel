@@ -1,68 +1,48 @@
-let n 
-初始化()
-let timer = setInterval(function(){
-    makeLeave(getImages(n))
-    .one('transitionend',(a)=>{
-        makeEnter($(a.currentTarget))
-    })
-    makeCurrent(getImages(n+1))
-    n++
-}
-    ,1500)
-
-document.addEventListener("visibilitychange", function() {
-    if(document.hidden){
-        window.clearInterval(timer)
-    } else { 
-        timer = setInterval(function(){
-            makeLeave(getImages(n))
-            .one('transitionend',(a)=>{
-                makeEnter($(a.currentTarget))
-            })
-            makeCurrent(getImages(n+1))
-            n++
-        }
-            ,1500)
-
-    }
+let $buttons=$('.buttonsWrapper>button')
+let $images = $('#slide>img')
+let $first = $images.eq(0).clone(true)
+let $last = $images.eq($images.length-1).clone(true)
+$('#slide').append($first)
+$('#slide').prepend($last)
+let current = 0
+$('#slide').css({transform:'translateX(-500px)'})
+bindEvent()
+$(next).on('click',function(){
+    getSlide(current+1)
 })
-
-
-
-
-
-
-
-
-
-
-function x(n){
-    if(n>3){
-        n = n%3
-        if(n===0){
-            n=3
-        }
+$(previous).on('click',function(){
+    getSlide(current-1)
+})
+function bindEvent() {
+   $('.buttonsWrapper').on('click','button',function(a){
+        let $button = $(a.currentTarget)
+        let index = $button.index()
+        getSlide(index)
+   })  
+}
+    
+function getSlide(index){
+    if (index>$buttons.length-1){
+        index=0
+    } else if(index<0){
+        index=$buttons.length-1
     }
-    return n
+    if(current===$buttons.length-1 && index===0){
+        $('#slide').css({transform:`translateX(${-($buttons.length+1)*500}px)`})
+        .one('transitionend',function(){
+            $('#slide').hide().offset()
+            $('#slide').css({transform:'translateX(-500px)'}).show()
+        })
+    } else if(current===0 && index===$buttons.length-1) {
+        $('#slide').css({transform:`translateX(0px)`})
+        .one('transitionend',function(){
+            $('#slide').hide().offset()
+            $('#slide').css({transform:`translateX(${-($buttons.length)*500}px)`}).show()
+        })
+    } else {
+        $('#slide').css({transform:`translateX(${-(index+1)*500}px)`})
+    }
+    current=index //记录current 当前位置
 }
 
-function getImages(n){
-    return $(`.images>img:nth-child(${x(n)})`)
-}
-
-function makeCurrent($nodes) {
-    return $nodes.removeClass('leave enter').addClass('current')
-}
-
-function makeLeave($nodes) {
-    return $nodes.removeClass('current').addClass('leave')
-}
-
-function makeEnter($nodes) {
-    return $nodes.removeClass('leave').addClass('enter')
-}
-
-function 初始化(){
-    n = 1
-    $(`.images>img:nth-child(${n})`).addClass('current').siblings().addClass('enter')
-}
+  

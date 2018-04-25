@@ -8,13 +8,25 @@
     <title>无缝轮播</title>
 </head>
 <body>
-    <div class="window">
-       <div class="images">
-           <img src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-435141.jpg" alt="图片" width="500" height="400">
-           <img src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-540605.jpg" alt="图片" width="500" height="400">
-           <img src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-156677.jpg" alt="图片" width="500" height="400">
-       </div>
-   </div> 
+    <div class="container">
+        <div  class="window">
+            <div id="slide" class="images">
+                <img src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-435141.jpg" alt="图片" width="500" height="400">
+                <img src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-540605.jpg" alt="图片" width="500" height="400">
+                <img src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-156677.jpg" alt="图片" width="500" height="400">
+                <img src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-540605.jpg" alt="图片" width="500" height="400">
+            </div>
+        </div>
+        <div class="controler" style="text-align:center">
+            <button id="previous">上一张</button>
+            <button id="next">下一张</button>
+        </div>
+        <div class="buttonsWrapper">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+    </div>
    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
    <script src="./main.js"></script>
 </body>
