@@ -1,6 +1,6 @@
 let n 
 初始化()
-setInterval(function(){
+let timer = setInterval(function(){
     makeLeave(getImages(n))
     .one('transitionend',(a)=>{
         makeEnter($(a.currentTarget))
@@ -9,6 +9,32 @@ setInterval(function(){
     n++
 }
     ,1500)
+
+document.addEventListener("visibilitychange", function() {
+    if(document.hidden){
+        window.clearInterval(timer)
+    } else { 
+        timer = setInterval(function(){
+            makeLeave(getImages(n))
+            .one('transitionend',(a)=>{
+                makeEnter($(a.currentTarget))
+            })
+            makeCurrent(getImages(n+1))
+            n++
+        }
+            ,1500)
+
+    }
+})
+
+
+
+
+
+
+
+
+
 
 function x(n){
     if(n>3){
